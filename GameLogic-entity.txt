@@ -1,0 +1,24 @@
+Modelo Nivel
+------------
+
+- Registra informacion relacionada a un nivel
+
+* Identificador ID
+* Numero del nivel
+* Un nivel tiene muchos teoremas, un teorema solo puede pertenecer a un nivel
+
+Modelo UserLevelProgress
+------------------------
+
+- Registra el proceso de un usuario en un nivel
+
+* Cada userLevelProgress se asocia a un unico usuario, un usuario puede estar asociados a multiples userLevelProgress.
+* Cada userLevelProgress se asocia a un unico nivel, un nivel puede estar asociados a multiples userLevelProgress.
+* Un userLevelProgress se asocia a multiples resuelves, un resuelve se asocia a un unico userLevelProgress
+* Numero total de puntos del usuario
+
+Modelo Teorema
+
+Modelo Usuario
+
+El usuario Juan ha resuelto el teorema N del nivel X

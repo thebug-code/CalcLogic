@@ -1,6 +1,5 @@
 package com.calclogic.entity;
 
-
 import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
 import com.calclogic.lambdacalculo.Term;
 import java.util.Comparator;
@@ -21,21 +20,23 @@ public class Teorema implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teorema_id_seq")
   @SequenceGenerator(name = "teorema_id_seq", sequenceName = "teorema_id_seq", allocationSize = 1)
   private int id;
-  
+
   @Column(nullable = false, columnDefinition = "TEXT")
   private String
       enunciado; // Is the formula of the theorem, expressed with the application notation
-  
+
   private Term teoTerm; // Is the formula but parsed in order that it is seen as a tree.
-  
+
   private Term metateoTerm;
-  
+
   private boolean esquema;
-  
+
   @Column(nullable = false)
   private String aliases;
-  
+
   private String constlist;
+
+  private int points;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "purecombstheoid", nullable = false)
@@ -43,6 +44,10 @@ public class Teorema implements Serializable {
 
   @OneToMany(mappedBy = "teorema", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Resuelve> resuelves;
+
+  @ManyToOne
+  @JoinColumn(name = "level_id")
+  private LevelInfo levelInfo;
 
   public Teorema() {}
 
@@ -153,5 +158,20 @@ public class Teorema implements Serializable {
   public void setAliases(String aliases) {
     this.aliases = aliases;
   }
-}
 
+  public LevelInfo getLevelInfo() {
+    return levelInfo;
+  }
+
+  public void setLevelInfo(LevelInfo levelInfo) {
+    this.levelInfo = levelInfo;
+  }
+
+  public int getPoints() {
+    return points;
+  }
+
+  public void setPoints(int points) {
+    this.points = points;
+  }
+}
