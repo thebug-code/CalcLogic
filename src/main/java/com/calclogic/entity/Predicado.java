@@ -1,19 +1,19 @@
 package com.calclogic.entity;
+
 // Generated Mar 20, 2017 12:50:11 PM by Hibernate Tools 3.2.1.GA
 
 import com.calclogic.lambdacalculo.Term;
 import javax.persistence.*;
 import java.io.Serializable;
 
-//import org.eclipse.jdt.internal.compiler.ast.ThisReference;
+// import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 import org.springframework.util.SerializationUtils;
-
 
 /**
  * @author alejandro
  */
 @Entity
-public final class Predicado extends notacionOwner implements Serializable {
+public class Predicado extends notacionOwner implements Serializable {
 
   @EmbeddedId private PredicadoId id;
 
@@ -48,7 +48,7 @@ public final class Predicado extends notacionOwner implements Serializable {
     this.id = id;
     this.usuario = usuario;
     this.predicado = predicado;
-//    this.alias = alias;
+    //    this.alias = alias;
     this.argumentos = argumentos;
     this.aliases = aliases;
     setNotacion(notacion);
@@ -78,13 +78,13 @@ public final class Predicado extends notacionOwner implements Serializable {
     this.predicado = predicado;
   }
 
-//  public String getAlias() {
-//    return this.alias;
-//  }
+  //  public String getAlias() {
+  //    return this.alias;
+  //  }
 
-//  public void setAlias(String alias) {
-//    this.alias = alias;
-//  }
+  //  public void setAlias(String alias) {
+  //    this.alias = alias;
+  //  }
 
   public String getArgumentos() {
     return this.argumentos;
@@ -151,5 +151,3 @@ public final class Predicado extends notacionOwner implements Serializable {
     return defaultNotacion.toString();
   }
 }
-
-
