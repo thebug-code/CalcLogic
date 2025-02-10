@@ -3,6 +3,7 @@ package com.calclogic.entity;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ import javax.persistence.SequenceGenerator;
 /**
  * @author alejandro
  */
+@Entity
 public class UserLevelProgress implements Serializable {
 
   @Id
@@ -27,11 +29,11 @@ public class UserLevelProgress implements Serializable {
   private int totalPoints;
 
   @ManyToOne
-  @JoinColumn(name = "user_pk")
+  @JoinColumn(name = "user_fk")
   private Usuario user;
 
   @ManyToOne
-  @JoinColumn(name = "level_pk")
+  @JoinColumn(name = "level_fk")
   private LevelInfo levelInfo;
 
   @OneToMany(mappedBy = "progress", cascade = CascadeType.ALL)

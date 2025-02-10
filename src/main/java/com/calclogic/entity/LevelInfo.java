@@ -9,6 +9,7 @@ import javax.persistence.SequenceGenerator;
 import com.calclogic.types.Level;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
@@ -25,15 +26,16 @@ public class LevelInfo implements Serializable {
   private int id;
 
   @Enumerated(EnumType.STRING)
-  private Level level;
+  @Column(name = "levelType")
+  private Level levelType;
 
-  @OneToMany(mappedBy = "levenInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "levelInfo", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Teorema> theorems;
 
   public LevelInfo() {}
 
   public LevelInfo(Level level, Set<Teorema> theorems) {
-    this.level = level;
+    this.levelType = level;
     this.theorems = theorems;
   }
 
@@ -45,12 +47,12 @@ public class LevelInfo implements Serializable {
     this.id = id;
   }
 
-  public Level getLevel() {
-    return level;
+  public Level getLevelType() {
+    return levelType;
   }
 
-  public void setLevel(Level level) {
-    this.level = level;
+  public void setLevelType(Level level) {
+    this.levelType = level;
   }
 
   public Set<Teorema> getTheorems() {

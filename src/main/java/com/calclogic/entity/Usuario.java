@@ -3,7 +3,6 @@ package com.calclogic.entity;
 // Generated Mar 20, 2017 12:50:11 PM by Hibernate Tools 3.2.1.GA
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -62,7 +61,7 @@ public class Usuario implements Serializable {
   private Set<Resuelve> resuelves;
 
   @OneToMany(mappedBy = "user")
-  private Set<UserLevelProgress> levelProgress;
+  private Set<UserLevelProgress> userProgresses;
 
   public Usuario() {}
 
@@ -244,11 +243,11 @@ public class Usuario implements Serializable {
     this.resuelves = resuelves;
   }
 
-  public Set<UserLevelProgress> getLevelProgress() {
-    return levelProgress;
+  public Set<UserLevelProgress> getUserProgresses() {
+    return userProgresses;
   }
 
-  public void setLevelProgress(Set<UserLevelProgress> levelProgress) {
-    this.levelProgress = levelProgress;
+  public void setUserProgresses(Set<UserLevelProgress> userProgresses) {
+    this.userProgresses = userProgresses;
   }
 }

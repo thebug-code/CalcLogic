@@ -1,3 +1,13 @@
+Primero se refactorizo todo la logica para el modelo de base de datos:
+
+* Migración de mapeo de entidades de Hibernate XML a anotaciones JPA
+* Actualizar dependencias: hibernate, spring framework, etc...
+-------------------------------------------------------------------
+
+
+Luego, se creo el modelo de base de datos para la logica de juegos:
+
+
 Modelo Nivel
 ------------
 
@@ -22,3 +32,7 @@ Modelo Teorema
 Modelo Usuario
 
 El usuario Juan ha resuelto el teorema N del nivel X
+-------------------------------------------------------------------
+
+
+Ahora se valida si
