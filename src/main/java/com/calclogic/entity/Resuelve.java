@@ -22,10 +22,7 @@ public class Resuelve implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "resuelve_id_seq")
-  @SequenceGenerator(
-      name = "resuelve_id_seq",
-      sequenceName = "resuelve_id_seq",
-      allocationSize = 1)
+  @SequenceGenerator(name = "resuelve_id_seq", sequenceName = "resuelve_id_seq", allocationSize = 1)
   private int id;
 
   @Column(nullable = false)
@@ -61,6 +58,10 @@ public class Resuelve implements Serializable {
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "teoriaid", nullable = false)
   private Teoria teoria;
+
+  @ManyToOne
+  @JoinColumn(name = "progress_fk")
+  private UserLevelProgress progress;
 
   @OneToMany(mappedBy = "resuelve", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Solucion> solucions;
@@ -217,6 +218,14 @@ public class Resuelve implements Serializable {
 
   public void setSolucions(Set solucions) {
     this.solucions = solucions;
+  }
+
+  public UserLevelProgress getProgress() {
+    return progress;
+  }
+
+  public void setProgress(UserLevelProgress progress) {
+    this.progress = progress;
   }
 
   // This allows a list of Resuelves to be ordered according to the id of the theorems
