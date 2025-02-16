@@ -3,7 +3,7 @@ package com.calclogic.types;
 /**
  * @author alejandro
  */
-public enum Level {
+public enum LevelType {
   ONE,
   TWO,
   THREE,

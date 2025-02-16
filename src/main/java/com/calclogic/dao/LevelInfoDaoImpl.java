@@ -4,6 +4,7 @@ import com.calclogic.entity.LevelInfo;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * This class has the implementation of the database queries that have to do with the table
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author alejandro
  */
+@Repository
 public class LevelInfoDaoImpl implements LevelInfoDAO {
 
   @Autowired private SessionFactory sessionFactory;

@@ -4,6 +4,7 @@ import com.calclogic.dao.LevelInfoDAO;
 import com.calclogic.entity.LevelInfo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author alejandro
  */
+@Service
 public class LevelInfoManagerImpl implements LevelInfoManager {
 
   @Autowired LevelInfoDAO levelInfoDAO;

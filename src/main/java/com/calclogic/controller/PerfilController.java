@@ -25,6 +25,8 @@ import com.calclogic.entity.PredicadoId;
 import com.calclogic.entity.Incluye;
 import com.calclogic.entity.IncluyeId;
 import com.calclogic.entity.PureCombsTheorem;
+import com.calclogic.entity.LevelInfo;
+import com.calclogic.types.LevelType;
 import com.calclogic.forms.AgregarCategoria;
 import com.calclogic.forms.AgregarSimbolo;
 import com.calclogic.forms.AddTheoryForm;
@@ -35,6 +37,7 @@ import com.calclogic.forms.InsertarEvaluar;
 import com.calclogic.forms.ModificarAliasForm;
 import com.calclogic.forms.ModificarForm;
 import com.calclogic.forms.MostrarCategoriaForm;
+import com.calclogic.forms.AddLevelForm;
 import com.calclogic.forms.Registro;
 import com.calclogic.forms.UsuarioGuardar;
 import com.calclogic.forms.teoremasSolucion;
@@ -45,6 +48,7 @@ import com.calclogic.lambdacalculo.Const;
 import com.calclogic.lambdacalculo.Sust;
 import com.calclogic.service.TerminoManager;
 import com.calclogic.service.UsuarioManager;
+import com.calclogic.service.LevelInfoManager;
 import com.calclogic.lambdacalculo.Term;
 import com.calclogic.lambdacalculo.Tokenizar;
 import com.calclogic.lambdacalculo.TypeVerificationException;
@@ -120,6 +124,8 @@ public class PerfilController {
     private MateriaManager materiaManager;
     @Autowired
     private TeoriaManager teoriaManager;
+    @Autowired
+    private LevelInfoManager levelManager;
     @Autowired
     private MostrarCategoriaManager mostrarCategoriaManager;
     @Autowired
@@ -2377,8 +2383,94 @@ public class PerfilController {
         
         return "theories";
     }
-    
-    
+
+    @RequestMapping(value = "/{username}/level-details", method = RequestMethod.GET)
+    public String LevelDetailsView(@PathVariable String username, ModelMap map) {
+      
+        // Get the user
+        Usuario user = (Usuario) session.getAttribute("user");
+
+        if (user == null || !user.getLogin().equals(username) || !user.isAdmin()) {
+          return "redirect:/index";
+        }
+
+        Usuario usr = usuarioManager.getUsuario(username);
+        List<LevelInfo> levels = levelManager.getAllLevels();
+
+        map.addAttribute("usuario", usr);
+        map.addAttribute("mensaje", "");
+        map.addAttribute("guardarMenu", "");
+        map.addAttribute("listarTerminosMenu", "");
+        map.addAttribute("misTeoremasMenu", "");
+        map.addAttribute("agregarTeoremaMenu", "");
+        map.addAttribute("perfilMenu", "");
+        map.addAttribute("theoriesMenu", "active");
+        map.addAttribute("students", "");
+        map.addAttribute("isAdmin", usr.isAdmin() ? Integer.valueOf(1) : Integer.valueOf(0));
+        map.addAttribute("helpMenu", "");
+        map.addAttribute("overflow", "hidden");
+        map.addAttribute("anchuraDiv", "1100px");
+        map.addAttribute("levels", levels);
+        map.addAttribute("addLevelForm", new AddLevelForm());
+        map.addAttribute("levelIds", LevelType.values());
+
+
+        return "levels";
+    }
+
+  @RequestMapping(value = "/{username}/level-details", method = RequestMethod.POST)
+  public String LevelDetailsViewPost( //
+      @Valid AddLevelForm addLevelForm,
+      BindingResult bindingResult,
+      @PathVariable String username,
+      ModelMap map) {
+
+    // Get the user
+    Usuario user = (Usuario) session.getAttribute("user");
+
+    if (user == null || !user.getLogin().equals(username) || !user.isAdmin()) {
+      return "redirect:/index";
+    }
+
+    Integer isAdmin = user.isAdmin() ? 1 : 0;
+
+    // Check for validation errors
+    if (bindingResult.hasErrors()) {
+      map.addAttribute("isAdmin", isAdmin);
+      map.addAttribute("overflow", "hidden");
+      map.addAttribute("anchuraDiv", "1100px");
+      map.addAttribute("addLevelForm", addLevelForm);
+      return "levels";
+    }
+
+    try {
+
+      // Extract data from the form
+      LevelType levelName = addLevelForm.getLevelType();
+
+      // Create the level
+      LevelInfo level = new LevelInfo(levelName);
+      levelManager.addLevel(level);
+      
+      List<LevelInfo> levels = levelManager.getAllLevels();
+
+      map.addAttribute("successMessage", "Level added successfully");
+      //      session.setAttribute("flashMessage", "Cliente eliminado exitosamente");
+      map.addAttribute("isAdmin", user.isAdmin() ? Integer.valueOf(1) : Integer.valueOf(0));
+      map.addAttribute("overflow", "hidden");
+      map.addAttribute("anchuraDiv", "1100px");
+      map.addAttribute("levels", levels);
+
+      return "levels";
+    } catch (Exception e) {
+      map.addAttribute("errorMessage", "An error occurred" + e.getMessage());
+      map.addAttribute("isAdmin", user.isAdmin() ? 1 : 0);
+      map.addAttribute("levelIds", LevelType.values());
+      map.addAttribute("addLevelForm", addLevelForm);
+      return "levels";
+    }
+  }
+
     @RequestMapping(value = "/{username}/addTheory", method = RequestMethod.GET)
     public String AddTheoriesView(@PathVariable String username, ModelMap map) {
 

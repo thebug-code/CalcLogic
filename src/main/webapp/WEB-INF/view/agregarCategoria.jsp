@@ -30,8 +30,7 @@
                     </c:forEach>
                 </select>
                 </div>
-            </div>
-                
+            </div>   
                 
             <div class="row justify-content-center" >
                 <div class="offset-lg-1 col-lg-3">

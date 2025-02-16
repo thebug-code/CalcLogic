@@ -11,7 +11,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>CalcLogic</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/bluemarine_favicon.ico" type="image/vnd.microsoft.icon" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css" >
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/mathJax2_7_9.css">
     <script src="${pageContext.request.contextPath}/static/js/popper.min.js"></script>
