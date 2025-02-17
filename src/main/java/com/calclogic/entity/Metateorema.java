@@ -34,6 +34,9 @@ public class Metateorema implements Serializable {
   @OneToMany(mappedBy = "metateorema", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Dispone> dispones;
 
+  @ManyToMany(mappedBy = "metaTheorems")
+  private Set<Teoria> theories;
+
   public Term getTeoTerm() {
     return teoTerm;
   }
@@ -85,5 +88,9 @@ public class Metateorema implements Serializable {
 
   public void setDispones(Set dispones) {
     this.dispones = dispones;
+  }
+
+  public Set<Teoria> getTheories() {
+    return theories;
   }
 }

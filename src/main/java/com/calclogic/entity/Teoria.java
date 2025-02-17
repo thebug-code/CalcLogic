@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -26,6 +29,13 @@ public class Teoria implements Serializable {
 
   @Column(nullable = false)
   private String nombre;
+
+  @ManyToMany
+  @JoinTable(
+      name = "theory_metatheorem",
+      joinColumns = @JoinColumn(name = "theory_pk"),
+      inverseJoinColumns = @JoinColumn(name = "metatheorem_pk"))
+  private Set<Metateorema> metaTheorems;
 
   public Teoria() {}
 
@@ -47,5 +57,9 @@ public class Teoria implements Serializable {
 
   public void setNombre(String nombre) {
     this.nombre = nombre;
+  }
+
+  public Set<Metateorema> getMetaTheorems() {
+    return metaTheorems;
   }
 }
